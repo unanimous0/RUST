@@ -5,6 +5,7 @@ fn main() {
     args_ex3();
     args_ex4();
     args_ex5();
+    args_ex6();
 }
 
 fn args_ex1() {
@@ -79,7 +80,7 @@ fn args_ex4() {
     /*
         &args[1];
 
-        여기서 env::args()는 명령줄 인수를 받아들ㄹ이고, 이 인수들을 Vec<String> (문자열 벡터)로 수집하고,
+        여기서 env::args()는 명령줄 인수를 받아들이고, 이 인수들을 Vec<String> (문자열 벡터)로 수집하고,
         이때 args는 힙(Heap) 메모리에 저장된 String 타입의 벡터임.
 
         args[1]은 String 타입의 요소를 가져오고,
@@ -133,4 +134,40 @@ fn args_ex5() {
                                             // 변수에 match를 이용해 값을 할당할 경우, Ok일 때와 Err일 때의 타입을 일치시켜야한다.
                                             
     println!("{}", text);
+}
+
+fn args_ex6() {
+    println!();
+    println!("Args 예제 6");
+
+    use std::{env, fs};
+
+    // 명령줄 인수 취득
+    let args = env::args();
+    
+    let mut total: f64 = 0.0;
+
+    // 모든 인수 처리
+    for (i, fname) in args.enumerate() {
+        if i == 0 { continue; }
+
+        // 텍스트 파일을 읽어들임
+        let text = fs::read_to_string(fname).unwrap();
+
+        // 한 줄씩 분리
+        let lines = text.split('\n');
+
+        // 반복해서 계산
+        for line in lines {
+            // 숫자로 변경
+            let n: f64 = match line.parse() {
+                Ok(v) => v,
+                Err(_) => 0.0,
+            };
+
+            total += n;
+        }
+    }
+
+    println!("{}", total);
 }
