@@ -1,15 +1,17 @@
 fn main() {
-    // 1에서 100까지 반복
-    for i in 1..101 {
-        // 조건과 일치하는지 확인
-        if i % 3 == 0 && i % 5 == 0 {
-            println!("FizzBuzz");
-        } else if i % 3 == 0 {
-            println!("Fizz");
-        } else if i % 5 == 0 {
-            println!("Buzz");
-        } else {
-            println!("{}", i);
-        }
-    }
+    let mut v = 10;
+
+    set_value(&mut v);
+
+    println!("v = {}", v);
 }
+
+// 인수의 값을 100으로 변경하는 함수
+fn set_value(arg: &mut i32) {
+    *arg = 100;
+}
+
+/*
+    실행 결과
+    v = 100
+*/

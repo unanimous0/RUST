@@ -1,0 +1,1 @@
+/Users/unanimous0/Desktop/RUST/Chapter\ 3/ownership/target/debug/ownership: /Users/unanimous0/Desktop/RUST/Chapter\ 3/ownership/src/main.rs /Users/unanimous0/Desktop/RUST/Chapter\ 3/ownership/src/ownership_check.rs
