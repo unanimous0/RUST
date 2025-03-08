@@ -1,0 +1,1 @@
+/Users/unanimous0/Desktop/RUST/Chapter\ 3/rust_struct/target/debug/rust_struct: /Users/unanimous0/Desktop/RUST/Chapter\ 3/rust_struct/src/main.rs /Users/unanimous0/Desktop/RUST/Chapter\ 3/rust_struct/src/struct_sample.rs
