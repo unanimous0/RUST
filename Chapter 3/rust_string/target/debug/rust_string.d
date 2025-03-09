@@ -1,0 +1,1 @@
+/Users/unanimous0/Desktop/RUST/Chapter\ 3/rust_string/target/debug/rust_string: /Users/unanimous0/Desktop/RUST/Chapter\ 3/rust_string/src/main.rs /Users/unanimous0/Desktop/RUST/Chapter\ 3/rust_string/src/string_sample.rs
