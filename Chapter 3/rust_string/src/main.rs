@@ -5,4 +5,5 @@ fn main() {
     string_sample::string_example2();
     string_sample::string_example3();
     string_sample::string_example4();
+    string_sample::string_example5();
 }

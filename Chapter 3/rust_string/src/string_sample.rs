@@ -25,7 +25,7 @@ pub fn string_example2() {
     let so2: String = ss.to_string();
 
     // String -> &str
-    let ss2: &str = &so1;
+    let ss2: &str = &so1;                   // so1은 String이고 &s01은 &String인데, 러스트에서는 &String -> &str로 자동 변환이 일어남
     let ss3: &str = so1.as_str();
 
     // String -> &str    
@@ -140,6 +140,59 @@ pub fn string_example4() {
         그리고 필요에 따라 Vec<char>로 변환해 처리하는 것이다.
 
         이게 무슨 말이냐면, pr 변수 자체는 원래 Vec<u8> 타입인데, 이걸 한 문자씩 출력할 수 없어. 그러니까 한 문자씩 출력하려고(=필요에 따라) Vec<char>로 변환해서 처리한 것
-        그래서 pr은 Vec<u8>이고, pr_chars는 Vec<u8>이 Vec<char>로 변환된거야. 물론 용량은 pr_chars가 더 크겠지. 1바이트 vs 4바이트 이니까.
+        그래서 pr은 Vec<u8>이고, pr_chars는 Vec<u8>이 Vec<char>로 변환된거야. 물론 용량은 pr_chars가 더 크겠지. 1바이트(u8) vs 4바이트(char) 이니까.
      */
 }
+
+
+
+// &'static str을 이용하는 함수
+fn echo(s: &'static str) {
+    println!("{}", s);
+}
+
+pub fn string_example5() {
+    println!();
+    println!("문자열 예제 4");
+
+    // 문자열 리터럴 (&'static str)을 지정
+    echo("웅변은 은이요");
+    echo("침묵은 금이다");
+
+    // 아래 주석은 에러가 발생함
+    // let s = String::from("테스트");
+    // echo(&s);
+    
+    /*
+        &s는 라이프타임이 'static str 보다 짧음. 주기가 서로 다른 타입을 지정했으니 에러가 발생한 것.
+        그래서 p.197처럼 인수 타입을 &String으로 바꿔주면 에러가 사라진다.
+
+        let s = String::from("테스트");
+        echo(&s);
+
+        fn echo(s: &str) {
+            println!("{}", s);
+        }
+
+        로 수정하면 에러가 없을 것.
+
+        Q. 이때 &s는 &String 타입이고, echo 메서드의 인자 타입은 &str로 다른 것 아닌가 할 수 있는데,
+        
+        A. Rust에서는 &String 타입을 &str 타입으로 자동으로 변환(deref coercion) 해주기 때문에 코드가 정상적으로 실행됨
+
+        1. &String과 &str의 관계
+	    •	String 타입은 내부적으로 str(string slice)을 소유하는 구조체
+	    •	따라서 &String은 필요에 따라 &str로 자동 변환될 수 있음
+
+        즉, &s는 &String이지만, echo 함수가 &str을 요구하므로 Rust가 자동으로 &s를 &str로 변환되며, 결과적으로 echo(s.as_str())와 동일하게 동작함
+
+        단, &String을 필요로 하는 함수에 &str을 넘길 때는 자동 변환이 안됨. (String이 str을 소유하는 구조체이므로 반대 방향의 변환이 불가능함)
+        •	&String -> &str 변환은 가능하지만,
+        •	&str -> &String 변환은 자동으로 되지 않음            
+     */
+}
+
+
+
+
+
