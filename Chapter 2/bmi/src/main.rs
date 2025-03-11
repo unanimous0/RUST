@@ -19,23 +19,23 @@ fn main() {
     else if bmi < 35.0 { println!("비만 2단계"); }
     else { println!("비만 3단계"); }
 
-    // 표준 입력에서 1줄씩 읽어 f64 타입으로 반환하는 함수
-    fn input(prompt: &str) -> f64 {
-        // 메세지 출력
-        println!("{}", prompt);
-
-        // 입력 값을 가져옴
-        let mut s = String::new();
-        std::io::stdin().read_line(&mut s).expect("입력 에러");
-
-        // 공백을 제거하고 숫자 값으로 변환
-        // return s.trim().parse().expect("숫자가 아닙니다.");     // 여기서는 그냥 parse 메서드를 이용했지만 실제론 타입 추론 기능이 동작해 함수의 반환값인 f64로 변환이 이루어진다.
-        return s.trim().parse::<f64>().expect("숫자가 아닙니다.");
-    }
-
     println!("");
     str_parse_f::str_parse();
 
     println!("");
     str_parse_f::str_parse2();
+}
+
+
+// 표준 입력에서 1줄씩 읽어 f64 타입으로 반환하는 함수
+fn input(prompt: &str) -> f64 {
+    // 메세지 출력
+    println!("{}", prompt);
+
+    // 입력 값 가져오기
+    let mut s = String::new();
+    std::io::stdin().read_line(&mut s).expect("입력 에러");
+
+    // 공백을 제거하고 숫자로 변환
+    return s.trim().parse().expect("숫자가 아님");
 }
