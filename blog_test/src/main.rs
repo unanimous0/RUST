@@ -1,32 +1,29 @@
+use std::{env, fs};
+
 fn main() {
-    let mut height;
+    // 명령줄 인수 취득
+    let args = env::args();
+    let mut total: f64 = 0.0;
 
-    // 반복문
-    loop {
-        println!("키(cm) : ");
-        height = input_fault(0.0);  // 숫자 입력
-        
-        if height > 0.0 { break; }  // 숫자면 break
-        println!("숫자만 입력 가능합니다.");  // 숫자 아니면 출력
+    // 모든 인수 처리
+    for (i, fname) in args.enumerate() {
+        if i == 0 { continue; }
+
+        // 텍스트 파일 읽기
+        let text = fs::read_to_string(fname).unwrap();
+
+        // 한 줄씩 분리
+        let lines = text.split('\n');
+
+        // 반복해서 계산
+        for line in lines {
+            let n: f64 = match line.parse() {
+                Ok(v) => v,
+                Err(_) => 0.0,
+            };
+            total += n;
+        }
     }
 
-    // 표준 체중 계산
-    let weight = 22.0 * (height / 100.0).powf(2.0);
-    println!("표준 체중은 {:.1}kg 입니다.", weight);
-}
-
-// 표준 입력에서 문자열 얻기
-fn input_str() -> String {
-    let mut s = String::new();
-    std::io::stdin().read_line(&mut s).expect("입력 에러");
-    return s.trim_end().to_string();
-}
-
-// 표준 입력에서 실패 시 def 반환
-fn input_fault(def: f64) -> f64 {
-    let s = input_str();
-    match s.trim().parse() {
-        Ok(v) => v,
-        Err(_) => def,
-    }
+    println!("{}", total);
 }
